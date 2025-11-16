@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail | Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .product-detail-hero {
+      background: url('images/grocery-banner.png') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 30px;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.10);
+      margin-bottom: 0;
+    }
+    .product-detail-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 36px 28px;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      align-items: center;
+    }
+    .product-detail-img { flex: 1; min-width: 220px; text-align: center; }
+    .product-detail-img img { width: 220px; height: 220px; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 8px rgba(76,175,80,0.07); transition: transform .3s; }
+    .product-detail-img img:hover { transform: scale(1.05); }
+    .product-detail-info { flex: 2; min-width: 220px; }
+    .product-detail-info h2 { color: #4caf50; font-size: 2rem; margin-bottom: 10px; }
+    .product-detail-info p { font-size: 1.1rem; margin-bottom: 18px; color: #444; }
+    .product-detail-info h3 { color: #ff9800; font-size: 1.2rem; margin-bottom: 16px; }
+    .product-detail-info input[type="number"] { padding: 8px; width: 80px; border-radius: 6px; border: 1px solid #b9d86a; margin: 10px 0 18px 0; font-size: 1rem; }
+    .add-cart-btn { background: linear-gradient(90deg,#4caf50 60%,#b9d86a 100%); color:#fff; border:none; padding:10px 28px; border-radius:8px; cursor:pointer; font-weight:700; }
+    .add-cart-btn:hover { transform: scale(1.03); }
+    @media (max-width:700px) {
+      .product-detail-section { flex-direction: column; padding: 18px; gap: 18px; }
+      .product-detail-img img { width: 140px; height: 140px; }
+      .product-detail-info h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <span class="user-nav"></span>
+      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <!-- Product Hero -->
+  <section class="product-detail-hero">
+    <h1>Product Details</h1>
+    <p>Know more about your selected grocery item!</p>
+  </section>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail-section">
+    <div class="product-detail-img" id="detail-img">
+      <img src="images/default.png" alt="Product">
+    </div>
+
+    <div class="product-detail-info" id="detail-info">
+      <h2 id="detail-name">Product Name</h2>
+      <p id="detail-desc">Product description will appear here.</p>
+      <h3 id="detail-price">Price: ₹ 0</h3>
+
+      <label for="qty">Quantity:</label>
+      <input type="number" id="qty" value="1" min="1">
+
+      <br>
+      <button class="add-cart-btn requires-login" id="add-to-cart-btn"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      <a href="cart.html" style="margin-left:10px;display:inline-block;padding:10px 16px;background:#ff9800;color:#fff;border-radius:8px;text-decoration:none;">Go to Cart</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart. All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // get ?id= from url
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const idParam = parseInt(getQueryParam('id'), 10);
+      let product = null;
+
+      // Use products[] from js/script.js when available
+      if (typeof products !== 'undefined' && !isNaN(idParam)) {
+        product = products.find(p => p.id === idParam);
+      }
+
+      // If not found, attempt fallback by name param or show error
+      if (!product) {
+        // If no id or not found - try a 'name' query param or show message
+        const nameParam = getQueryParam('name');
+        if (nameParam && typeof products !== 'undefined') {
+          product = products.find(p => p.name.toLowerCase() === nameParam.toLowerCase());
+        }
+      }
+
+      if (!product) {
+        // final fallback: first product if products available, else static apple
+        if (typeof products !== 'undefined' && products.length) product = products[0];
+        else product = { id: 1, name: 'Fresh Apples', price: 200, image: 'images/apple.png', description: 'Farm fresh apples.' };
+      }
+
+      // render product
+      document.getElementById('detail-img').innerHTML = `<img src="${product.image}" alt="${product.name}">`;
+      document.getElementById('detail-name').textContent = product.name;
+      document.getElementById('detail-desc').textContent = product.description || '';
+      document.getElementById('detail-price').textContent = `Price: ₹ ${product.price}`;
+
+      // Add to cart behavior (uses updateCartCount() from script.js if present)
+      document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+        const qty = Math.max(1, parseInt(document.getElementById('qty').value) || 1);
+
+        // require user login if your app enforces it
+        if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+          alert('Please login first to add items to cart!');
+          window.location.href = 'login.html';
+          return;
+        }
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existing = cart.find(i => i.name === product.name);
+        if (existing) existing.qty += qty;
+        else cart.push({ name: product.name, price: product.price, qty: qty });
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        if (typeof updateCartCount === 'function') updateCartCount();
+        alert(`${product.name} (x${qty}) added to cart`);
+      });
+
+      // update navbar user/cart text
+      if (typeof updateNavbar === 'function') updateNavbar();
+      if (typeof updateCartCount === 'function') updateCartCount();
+    });
+  </script>
+</body>
+</html>

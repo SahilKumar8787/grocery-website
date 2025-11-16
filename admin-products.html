@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products - Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .products-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      padding: 32px 28px;
+    }
+    .products-section h1 {
+      color: #4caf50;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .add-product-btn {
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(255,152,0,0.10);
+      transition: background 0.3s, transform 0.2s;
+      outline: none;
+      margin-bottom: 18px;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .add-product-btn:hover {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      transform: scale(1.05);
+    }
+    .products-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+    .products-table th, .products-table td {
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #f6f8f7;
+    }
+    .products-table th {
+      background: #f6f8f7;
+      color: #4caf50;
+      font-weight: 600;
+    }
+    .products-table img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .product-action a {
+      color: #4caf50;
+      text-decoration: none;
+      margin-right: 10px;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .product-action a:hover {
+      color: #ff9800;
+      text-decoration: underline;
+    }
+    .product-action a.delete {
+      color: #e53935;
+    }
+    .product-action a.delete:hover {
+      color: #c62828;
+    }
+    @media (max-width: 700px) {
+      .products-section {
+        padding: 18px 8px;
+        border-radius: 10px;
+      }
+      .products-table th, .products-table td {
+        padding: 8px 4px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Admin Panel</div>
+    <div>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-products.html">Products</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-users.html">Users</a>
+      <a href="#" onclick="adminLogout()">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Products Section -->
+  <section class="products-section">
+    <h1><i class="fas fa-boxes"></i> Manage Products</h1>
+    <a href="admin-add-products.html" class="add-product-btn"><i class="fas fa-plus"></i> Add New Product</a>
+    
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="products-tbody">
+        <!-- Products will be rendered by JS -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart Admin Panel</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Display all products on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      isAdminLoggedIn();
+      displayAllProducts();
+    });
+
+    // Display all products in table
+    function displayAllProducts() {
+      const tbody = document.getElementById('products-tbody');
+      if (!tbody) return;
+
+      let prods = JSON.parse(localStorage.getItem('products'));
+      if (!prods) {
+        // Use default products from script.js if not in localStorage
+        if (typeof products !== 'undefined') prods = products;
+        else prods = [];
+      }
+
+      if (prods.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#888;">No products found</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = prods.map((prod, index) => `
+        <tr>
+          <td>${prod.id}</td>
+          <td>${prod.name}</td>
+          <td>${prod.category || 'N/A'}</td>
+          <td>₹ ${prod.price}</td>
+          <td><img src="${prod.image}" alt="${prod.name}"></td>
+          <td class="product-action">
+            <a href="#" onclick="editProductAdmin(${index}); return false;"><i class="fas fa-edit"></i> Edit</a>
+            <a href="#" class="delete" onclick="deleteProductAdmin(${index}); return false;"><i class="fas fa-trash"></i> Delete</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Edit product price
+    function editProductAdmin(index) {
+      let prods = JSON.parse(localStorage.getItem('products')) || products || [];
+      const prod = prods[index];
+      if (!prod) {
+        alert('Product not found');
+        return;
+      }
+
+      const newPrice = prompt(`Edit price for "${prod.name}":\n\nCurrent Price: ₹${prod.price}`, prod.price);
+      if (newPrice === null) return;
+
+      const price = parseInt(newPrice, 10);
+      if (isNaN(price) || price <= 0) {
+        alert('Please enter a valid price');
+        return;
+      }
+
+      prod.price = price;
+      localStorage.setItem('products', JSON.stringify(prods));
+      alert(`Price updated to ₹${price}`);
+      displayAllProducts();
+    }
+
+    // Delete product
+    function deleteProductAdmin(index) {
+      if (!confirm('Are you sure you want to delete this product?')) return;
+
+      let prods = JSON.parse(localStorage.getItem('products')) || products || [];
+      const deletedProd = prods[index];
+      prods.splice(index, 1);
+      localStorage.setItem('products', JSON.stringify(prods));
+
+      alert(`Product "${deletedProd.name}" deleted successfully`);
+      displayAllProducts();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .checkout-hero {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.10);
+    }
+    .checkout-hero .fa-credit-card {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #fff;
+      background: #ff9800;
+      border-radius: 50%;
+      padding: 16px;
+    }
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+    .checkout-form {
+      background: #fff;
+      padding: 32px 28px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+    }
+    .checkout-summary {
+      background: #fff;
+      padding: 32px 28px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      height: fit-content;
+    }
+    .checkout-form h2,
+    .checkout-summary h2 {
+      color: #4caf50;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+    }
+    .checkout-form label {
+      font-weight: 500;
+      color: #388e3c;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .checkout-form input,
+    .checkout-form select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b9d86a;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .checkout-form input:focus,
+    .checkout-form select:focus {
+      border: 1.5px solid #4caf50;
+    }
+    .checkout-form button {
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 8px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .checkout-form button:hover {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      transform: scale(1.02);
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f6f8f7;
+    }
+    .summary-item:last-child {
+      border-bottom: 2px solid #4caf50;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #4caf50;
+    }
+    .summary-item .qty {
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 20px;
+      color: #e53935;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+    @media (max-width: 600px) {
+      .checkout-form,
+      .checkout-summary {
+        padding: 18px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <span class="user-nav"></span>
+      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <!-- Checkout Hero -->
+  <section class="checkout-hero">
+    <i class="fas fa-credit-card"></i>
+    <h1>Checkout</h1>
+    <p>Complete your order and enjoy fresh groceries!</p>
+  </section>
+
+  <!-- Checkout Container -->
+  <div class="checkout-container">
+    <!-- Checkout Form -->
+    <form class="checkout-form" id="checkout-form" onsubmit="event.preventDefault(); submitCheckout();">
+      <h2><i class="fas fa-info-circle"></i> Billing Details</h2>
+      
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" placeholder="John Doe" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="john@example.com" required>
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" placeholder="9876543210" required>
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" placeholder="123 Main Street" required>
+
+      <label for="city">City:</label>
+      <input type="text" id="city" placeholder="Mumbai" required>
+
+      <label for="postal">Postal Code:</label>
+      <input type="text" id="postal" placeholder="400001" required>
+
+      <h2 style="margin-top: 24px;"><i class="fas fa-wallet"></i> Payment Method</h2>
+      <select id="payment" required>
+        <option value="">Select Payment Method</option>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+        <option value="Credit/Debit Card">Credit/Debit Card</option>
+        <option value="Google Pay">Google Pay</option>
+        <option value="PhonePe">PhonePe</option>
+        <option value="Paytm">Paytm</option>
+      </select>
+
+      <button type="submit" id="place-order-btn"><i class="fas fa-shopping-bag"></i> Place Order</button>
+    </form>
+
+    <!-- Order Summary -->
+    <div class="checkout-summary">
+      <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+      <div id="summary-items">
+        <div class="cart-empty">Your cart is empty!</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Fresh Mart</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Load cart summary on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCheckoutSummary();
+      updateNavbar();
+      updateCartCount();
+    });
+
+    // Load cart items into checkout summary
+    function loadCheckoutSummary() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const summaryDiv = document.getElementById('summary-items');
+
+      if (cart.length === 0) {
+        summaryDiv.innerHTML = '<div class="cart-empty"><i class="fas fa-inbox"></i><br>Your cart is empty!</div>';
+        document.getElementById('place-order-btn').disabled = true;
+        document.getElementById('place-order-btn').style.opacity = '0.5';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        html += `
+          <div class="summary-item">
+            <div>
+              <strong>${item.name}</strong>
+              <div class="qty">x${item.qty}</div>
+            </div>
+            <div style="text-align:right;">₹ ${itemTotal}</div>
+          </div>
+        `;
+      });
+
+      // Add subtotal, tax, and grand total
+      const tax = Math.round(total * 0.05); // 5% tax
+      const grandTotal = total + tax;
+
+      html += `
+        <div class="summary-item" style="margin-top:16px;">
+          <div>Subtotal:</div>
+          <div>₹ ${total}</div>
+        </div>
+        <div class="summary-item">
+          <div>Tax (5%):</div>
+          <div>₹ ${tax}</div>
+        </div>
+        <div class="summary-item">
+          <div>Grand Total:</div>
+          <div>₹ ${grandTotal}</div>
+        </div>
+      `;
+
+      summaryDiv.innerHTML = html;
+    }
+
+    // Submit checkout form
+    function submitCheckout() {
+      // Check if user is logged in
+      if (!isLoggedIn()) {
+        alert('Please login to place an order!');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const city = document.getElementById('city').value;
+      const postal = document.getElementById('postal').value;
+      const payment = document.getElementById('payment').value;
+
+      // Validate inputs
+      if (!fullName || !email || !phone || !address || !city || !postal || !payment) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      // Get cart
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      // Get current user
+      const user = getCurrentUser();
+      
+      // Calculate totals
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const tax = Math.round(subtotal * 0.05);
+      const totalAmount = subtotal + tax;
+
+      // Create order object
+      const order = {
+        orderId: '#' + Math.floor(Math.random() * 1000000),
+        customerId: user.id,
+        customer: fullName,
+        email: email,
+        phone: phone,
+        address: address,
+        city: city,
+        postal: postal,
+        paymentMethod: payment,
+        items: cart,
+        subtotal: subtotal,
+        tax: tax,
+        totalAmount: totalAmount,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString(),
+        status: 'Pending',
+        deliveryDate: new Date(Date.now() + 3*24*60*60*1000).toLocaleDateString(),
+        notes: ''
+      };
+
+      // Save order to localStorage
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.push(order);
+      localStorage.setItem('orders', JSON.stringify(orders));
+
+      // Clear cart
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Show success message
+      alert(`
+✓ Order Placed Successfully!
+
+Order ID: ${order.orderId}
+Total Amount: ₹ ${order.totalAmount}
+Delivery Date: ${order.deliveryDate}
+
+You will receive an email confirmation shortly.
+      `.trim());
+
+      // Redirect to home
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

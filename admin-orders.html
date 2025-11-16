@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Orders - Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .orders-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      padding: 32px 28px;
+    }
+    .orders-section h1 {
+      color: #4caf50;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+    .orders-table th, .orders-table td {
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #f6f8f7;
+    }
+    .orders-table th {
+      background: #f6f8f7;
+      color: #4caf50;
+      font-weight: 600;
+    }
+    .orders-table img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 8px;
+    }
+    .order-status {
+      font-weight: bold;
+      color: #ff9800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #fff3e0;
+      display: inline-block;
+    }
+    .order-action a {
+      color: #4caf50;
+      text-decoration: none;
+      margin-right: 10px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .order-action a:hover {
+      color: #ff9800;
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .orders-section {
+        padding: 18px 8px;
+        border-radius: 10px;
+      }
+      .orders-table th, .orders-table td {
+        padding: 8px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Admin Panel</div>
+    <div>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-products.html">Products</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-login.html">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Orders Section -->
+  <section class="orders-section">
+    <h1><i class="fas fa-shopping-basket"></i> Manage Orders</h1>
+    <table class="orders-table">
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>#1001</td>
+        <td>satyam</td>
+        <td><img src="images/apple.png" alt="Apple">Fresh Apples</td>
+        <td>2 kg</td>
+        <td>₹ 400</td>
+        <td><span class="order-status">Pending</span></td>
+        <td class="order-action">
+          <a href="#">Approve</a>
+          <a href="#">Reject</a>
+        </td>
+      </tr>
+      <tr>
+        <td>#1002</td>
+        <td>sumit patel</td>
+        <td><img src="images/milk.jpeg" alt="Milk">Organic Milk</td>
+        <td>1 L</td>
+        <td>₹ 80</td>
+        <td><span class="order-status" style="color:#4caf50;background:#e8f5e9;">Delivered</span></td>
+        <td class="order-action">
+          <a href="#">View</a>
+        </td>
+      </tr>
+      <tr>
+        <td>#1003</td>
+        <td>naman gupta
+        </td>
+        <td><img src="images/bread.jpeg" alt="Bread">Brown Bread</td>
+        <td>1 pack</td>
+        <td>₹ 45</td>
+        <td><span class="order-status">Pending</span></td>
+        <td class="order-action">
+          <a href="#">Approve</a>
+          <a href="#">Reject</a>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart Admin Panel</p>
+  </footer>
+</body>
+</html>

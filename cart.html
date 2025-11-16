@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .cart-hero {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.10);
+    }
+    .cart-hero .fa-shopping-cart {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      color: #fff;
+      background: #ff9800;
+      border-radius: 50%;
+      padding: 18px;
+      box-shadow: 0 2px 12px rgba(255,152,0,0.12);
+    }
+    .cart-section {
+      max-width: 700px;
+      margin: 32px auto 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      padding: 28px 20px;
+    }
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+    .cart-table th, .cart-table td {
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #f6f8f7;
+    }
+    .cart-table th {
+      background: #f6f8f7;
+      color: #4caf50;
+      font-weight: 600;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 1.2rem;
+      color: #ff9800;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+    .checkout-btn {
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(255,152,0,0.10);
+      transition: background 0.3s, transform 0.2s;
+      outline: none;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .checkout-btn:hover {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <!-- Cart Hero -->
+  <section class="cart-hero">
+    <i class="fas fa-shopping-cart"></i>
+    <h1>Your Cart</h1>
+    <p>Review your selected items and proceed to payment.</p>
+  </section>
+
+  <!-- Cart Section -->
+  <section class="cart-section">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="cart-total">
+      Grand Total: ₹ 0
+    </div>
+    <div style="text-align:center; margin-top:18px;">
+      <a href="checkout.html" class="checkout-btn requires-login">
+        <i class="fas fa-shopping-bag"></i> Order Now
+      </a>
+      <a href="login.html" class="checkout-btn login-only" style="display:none;">
+        <i class="fas fa-sign-in-alt"></i> Login to Order
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart. All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

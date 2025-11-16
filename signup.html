@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      min-height: 100vh;
+    }
+    .signup-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+    }
+    .signup-icon {
+      font-size: 3.5rem;
+      color: #fff;
+      background: #4caf50;
+      border-radius: 50%;
+      padding: 18px;
+      margin-bottom: 18px;
+      margin-top: 18px;
+    }
+    .signup-form {
+      background: rgba(255,255,255,0.97);
+      padding: 32px 28px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(255,152,0,0.10);
+      max-width: 400px;
+      width: 100%;
+    }
+    .signup-form label {
+      font-weight: 500;
+      color: #ff9800;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #fcb045;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .signup-form input:focus {
+      border: 1.5px solid #ff9800;
+    }
+    .signup-form button {
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .signup-form button:hover {
+      background: linear-gradient(90deg, #fcb045 60%, #ff9800 100%);
+    }
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .login-link a {
+      color: #4caf50;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- Signup Form -->
+  <section class="signup-section">
+    <span class="signup-icon"><i class="fas fa-user-plus"></i></span>
+    <h1 style="color:#ff9800;margin-bottom:10px;">Sign Up</h1>
+    <form class="signup-form" onsubmit="event.preventDefault(); signup(document.getElementById('name').value, document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value, document.getElementById('confirmPassword').value);">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Choose a username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Create a password" required>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+
+      <button type="submit">Sign Up</button>
+      <div class="login-link">
+        Already have an account? <a href="login.html">Login</a>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fresh Mart</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

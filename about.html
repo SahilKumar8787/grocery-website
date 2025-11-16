@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .about-hero {
+      background: url('images/grocery-banner.png') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 40px 20px;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.10);
+    }
+    .about-hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      background: rgba(0,0,0,0.4);
+      display: inline-block;
+      padding: 10px 30px;
+      border-radius: 10px;
+      letter-spacing: 2px;
+    }
+    .about-hero p {
+      font-size: 1.2rem;
+      background: rgba(0,0,0,0.3);
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .about-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 36px 28px;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.08);
+    }
+    .about-section h2 {
+      margin-top: 30px;
+      color: #4caf50;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .about-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 30px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .about-section ul li {
+      background: #f6f8f7;
+      padding: 16px 18px;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 1px 6px rgba(76,175,80,0.05);
+      margin-bottom: 0;
+    }
+    .about-section ul li::before {
+      content: "🌱";
+      margin-right: 12px;
+      font-size: 1.3rem;
+      color: #4caf50;
+    }
+    .about-join {
+      background: #fff3e0;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #ff9800;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    }
+    @media (max-width: 600px) {
+      .about-section {
+        padding: 18px 8px;
+      }
+      .about-section ul {
+        grid-template-columns: 1fr;
+      }
+      .about-hero h1 {
+        font-size: 1.5rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <h1>About Fresh Mart</h1>
+    <p>Fresh, organic groceries delivered to your doorstep. Experience the difference!</p>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-section">
+    <h2>Who We Are</h2>
+    <p>
+      Welcome to <strong>Fresh Mart</strong> – your one-stop shop for fresh, organic, and affordable groceries.
+      We believe in providing healthy and natural products that reach directly from farms to your home.
+    </p>
+    <p>
+      Our mission is to make grocery shopping simple, fast, and convenient for everyone.  
+      With our online store, you can order groceries anytime and get them delivered right to your doorstep.
+    </p>
+    <h2>Why Choose Us?</h2>
+    <ul>
+      <li>Fresh & Organic Products</li>
+      <li>Affordable Prices</li>
+      <li>Fast Home Delivery</li>
+      <li>Easy & Secure Payments</li>
+    </ul>
+    <div class="about-join">
+      <strong>Join Us:</strong> Become a part of our community and enjoy the benefits of fresh groceries delivered to you. Shop with us today!
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

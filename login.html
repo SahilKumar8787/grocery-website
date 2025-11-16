@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      min-height: 100vh;
+    }
+    .login-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+    }
+    .login-icon {
+      font-size: 3.5rem;
+      color: #fff;
+      background: #ff9800;
+      border-radius: 50%;
+      padding: 18px;
+      margin-bottom: 18px;
+      margin-top: 18px;
+    }
+    .login-form {
+      background: rgba(255,255,255,0.97);
+      padding: 32px 28px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-form label {
+      font-weight: 500;
+      color: #388e3c;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b9d86a;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .login-form input:focus {
+      border: 1.5px solid #4caf50;
+    }
+    .login-form button {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .login-form button:hover {
+      background: linear-gradient(90deg, #388e3c 60%, #8bc34a 100%);
+    }
+    .signup-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .signup-link a {
+      color: #ff9800;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Fresh Mart</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <section class="login-section">
+    <span class="login-icon"><i class="fas fa-sign-in-alt"></i></span>
+    <h1 style="color:#4caf50;margin-bottom:10px;">Login</h1>
+    <form class="login-form" onsubmit="event.preventDefault(); login(document.getElementById('username').value, document.getElementById('password').value);">
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter your username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+      <div class="signup-link">
+        New user? <a href="signup.html">Create an account</a>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fresh Mart</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Fresh Mart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .admin-hero {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(76,175,80,0.10);
+    }
+    .admin-hero .fa-user-cog {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      color: #fff;
+      background: #ff9800;
+      border-radius: 50%;
+      padding: 18px;
+      box-shadow: 0 2px 12px rgba(255,152,0,0.12);
+    }
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .stat-card {
+      background: #fff;
+      padding: 28px 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid #4caf50;
+    }
+    .stat-card:nth-child(2) {
+      border-top-color: #ff9800;
+    }
+    .stat-card:nth-child(3) {
+      border-top-color: #1976d2;
+    }
+    .stat-card:nth-child(4) {
+      border-top-color: #388e3c;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(76,175,80,0.16);
+    }
+    .stat-card i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4caf50;
+      margin: 10px 0;
+    }
+    .stat-card .label {
+      font-size: 1.08rem;
+      color: #666;
+    }
+    .admin-cards {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin: 40px auto;
+      max-width: 900px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+    .admin-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(76,175,80,0.10);
+      padding: 32px 28px;
+      text-align: center;
+      flex: 1;
+      min-width: 220px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .admin-card:hover {
+      box-shadow: 0 6px 24px rgba(76,175,80,0.18);
+      transform: scale(1.04);
+    }
+    .admin-card i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: #4caf50;
+    }
+    .admin-card h2 {
+      font-size: 1.3rem;
+      color: #ff9800;
+      margin-bottom: 10px;
+    }
+    .admin-card p {
+      color: #444;
+      margin-bottom: 18px;
+    }
+    .admin-card a {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff9800 60%, #fcb045 100%);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+    .admin-card a:hover {
+      background: linear-gradient(90deg, #4caf50 60%, #b9d86a 100%);
+      transform: scale(1.07);
+    }
+    @media (max-width: 700px) {
+      .admin-stats {
+        gap: 16px;
+        padding: 0 10px;
+      }
+      .stat-card {
+        padding: 18px;
+      }
+      .stat-card i {
+        font-size: 1.8rem;
+      }
+      .stat-card .number {
+        font-size: 1.5rem;
+      }
+      .admin-cards {
+        flex-direction: column;
+        gap: 18px;
+        padding: 0 10px;
+      }
+      .admin-card {
+        padding: 18px 10px;
+      }
+      .admin-hero .fa-user-cog {
+        font-size: 2.2rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Admin Panel</div>
+    <div>
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-products.html">Products</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-users.html">Users</a>
+      <a href="#" onclick="adminLogout(); return false;">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Dashboard Hero -->
+  <section class="admin-hero">
+    <i class="fas fa-user-cog"></i>
+    <h1>Welcome, Admin!</h1>
+    <p>Manage your grocery store efficiently from one place.</p>
+  </section>
+
+  <!-- Dashboard Statistics -->
+  <section class="admin-stats">
+    <div class="stat-card">
+      <i class="fas fa-users" style="color: #4caf50;"></i>
+      <div class="number" id="total-users">0</div>
+      <div class="label">Total Users</div>
+    </div>
+
+    <div class="stat-card">
+      <i class="fas fa-boxes" style="color: #ff9800;"></i>
+      <div class="number" id="total-products">0</div>
+      <div class="label">Total Products</div>
+    </div>
+
+    <div class="stat-card">
+      <i class="fas fa-shopping-bag" style="color: #1976d2;"></i>
+      <div class="number" id="total-orders">0</div>
+      <div class="label">Total Orders</div>
+    </div>
+
+    <div class="stat-card">
+      <i class="fas fa-rupee-sign" style="color: #388e3c;"></i>
+      <div class="number" id="total-revenue">₹0</div>
+      <div class="label">Total Revenue</div>
+    </div>
+  </section>
+
+  <!-- Dashboard Cards -->
+  <div class="admin-cards">
+    <div class="admin-card">
+      <i class="fas fa-boxes"></i>
+      <h2>Manage Products</h2>
+      <p>Add, edit, or remove products from your store.</p>
+      <a href="admin-products.html">Go to Products</a>
+    </div>
+    <div class="admin-card">
+      <i class="fas fa-shopping-basket"></i>
+      <h2>View Orders</h2>
+      <p>Track and process customer orders easily.</p>
+      <a href="admin-orders.html">Go to Orders</a>
+    </div>
+    <div class="admin-card">
+      <i class="fas fa-users"></i>
+      <h2>Manage Users</h2>
+      <p>View, edit, or remove user accounts.</p>
+      <a href="admin-users.html">Go to Users</a>
+    </div>
+    <div class="admin-card">
+      <i class="fas fa-plus-circle"></i>
+      <h2>Add Product</h2>
+      <p>Add new grocery items to your store.</p>
+      <a href="admin-add-products.html">Add Product</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fresh Mart Admin Panel</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Load dashboard statistics on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if admin is logged in
+      isAdminLoggedIn();
+      
+      // Load and display statistics
+      loadDashboardStatistics();
+    });
+
+    // Load dashboard statistics from localStorage
+    function loadDashboardStatistics() {
+      // Get total users
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      document.getElementById('total-users').textContent = users.length;
+
+      // Get total products
+      let prods = JSON.parse(localStorage.getItem('products'));
+      if (!prods && typeof products !== 'undefined') {
+        prods = products;
+      }
+      prods = prods || [];
+      document.getElementById('total-products').textContent = prods.length;
+
+      // Get total orders and revenue
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      document.getElementById('total-orders').textContent = orders.length;
+
+      // Calculate total revenue
+      const totalRevenue = orders.reduce((sum, order) => {
+        return sum + (order.totalAmount || 0);
+      }, 0);
+      document.getElementById('total-revenue').textContent = '₹' + totalRevenue.toLocaleString('en-IN');
+    }
+
+    // Refresh statistics every 5 seconds
+    setInterval(loadDashboardStatistics, 5000);
+  </script>
+</body>
+</html>
